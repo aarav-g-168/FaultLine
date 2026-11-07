@@ -985,6 +985,7 @@
         "properties": {
           "email": {
             "type": "string",
+            "maxLength": 254,
             "format": "email",
             "title": "Email"
           },
@@ -1007,6 +1008,7 @@
         "properties": {
           "email": {
             "type": "string",
+            "maxLength": 254,
             "format": "email",
             "title": "Email"
           },
@@ -1124,6 +1126,7 @@
         "properties": {
           "email": {
             "type": "string",
+            "maxLength": 254,
             "format": "email",
             "title": "Email"
           },

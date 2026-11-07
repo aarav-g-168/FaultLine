@@ -1,7 +1,7 @@
 name: faultline
 services:
   postgres:
-    image: postgres:17.6
+    image: postgres:17.11
     environment:
       POSTGRES_USER: faultline
       POSTGRES_DB: faultline
@@ -14,7 +14,7 @@ services:
       timeout: 3s
       retries: 10
   redis:
-    image: redis:7.4.5-alpine
+    image: redis:7.4.11-alpine
     command: ["redis-server", "--appendonly", "yes"]
     ports: ["127.0.0.1:6379:6379"]
     volumes: ["redis-data:/data"]
