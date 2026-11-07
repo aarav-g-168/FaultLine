@@ -2,14 +2,26 @@
   "name": "faultline",
   "private": true,
   "version": "0.1.0",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "mobile": "npm run start --workspace @faultline/mobile",
     "web": "npm run web --workspace @faultline/mobile",
     "typecheck": "npm run typecheck --workspace @faultline/mobile",
     "test:mobile": "npm run test --workspace @faultline/mobile",
-    "api:generate": "openapi-typescript packages/api-client/openapi.json -o packages/api-client/schema.d.ts"
+    "api:generate": "openapi-typescript packages/api-client/openapi.json -o packages/api-client/schema.d.ts",
+    "test:e2e": "playwright test",
+    "format": "prettier --write apps/mobile/app apps/mobile/src apps/mobile/__tests__ packages/api-client/index.ts tests playwright.config.ts package.json",
+    "format:check": "prettier --check apps/mobile/app apps/mobile/src apps/mobile/__tests__ packages/api-client/index.ts tests playwright.config.ts package.json"
   },
-  "devDependencies": {"openapi-typescript": "7.13.0", "@playwright/test": "1.58.2"},
-  "engines": {"node": ">=24"}
+  "devDependencies": {
+    "@playwright/test": "1.58.2",
+    "openapi-typescript": "7.13.0",
+    "prettier": "3.9.10"
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }
