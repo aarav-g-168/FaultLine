@@ -1,12 +1,12 @@
 # Faultline implementation plan
 
-Status: planning only. No application implementation has started.
+Status: M1 implemented and under review. M2–M7 have not started. Validation and environment limitations are recorded in docs/M1_VERIFICATION.md.
 
 ## Working agreement
 
 Implement one milestone at a time. At its end, run the relevant tests, fix regressions, update documentation, demonstrate the accepted workflow, and stop for user review before beginning the next milestone. Do not equate scaffolded UI, replayed AI output, or unconfigured integrations with completed functionality.
 
-This initial checkpoint delivers PRODUCT.md, ARCHITECTURE.md, and this plan after inspection of the empty workspace. The next action after review is M1, not the entire application.
+The initial checkpoint delivered PRODUCT.md, ARCHITECTURE.md, and this plan after inspection of the empty workspace. The user approved proceeding with M1. The next implementation checkpoint is M2, after review of the foundation.
 
 ## M1 — Foundation, identity, and mobile shell
 
@@ -140,7 +140,9 @@ Review checkpoint: release candidate review using the complete recorded and repe
 
 ## Current checkpoint
 
-- Complete: inspect workspace and available development commands; propose working name and architecture; create planning documents.
-- Pending: user review of this plan and M1 authorization.
-- Known environment constraint: Docker is not currently on PATH. Verify availability or arrange an executor before M5.
-- Not performed: dependency installation, application scaffolding, migrations, runtime tests, provider connections, or GitHub writes.
+- Implemented: pinned monorepo, Expo shell and API-connected identity/workspace/project/environment screens, secure native token storage adapter, PostgreSQL schema/migration, rotating sessions and shared throttling, project grants, audit records, Compose and CI definitions, generated client types, tests, setup documentation, and screenshots.
+- Verified: database-backed registration/login, cross-user access isolation, grant revocation, membership removal, refresh replay and concurrent rotation, restart persistence, mobile client session behavior, and a real browser journey. See docs/M1_VERIFICATION.md for exact results.
+- Pending review: M1 visual and foundation behavior. Do not start M2 until the user approves this checkpoint.
+- Environment limits: Docker/Compose execution and hosted CI have not been run. A workspace-local PostgreSQL runtime enabled real database tests. Native Android/iOS device smoke testing remains pending; browser checks do not prove device storage behavior.
+- Security follow-up: transitive Expo/Jest dependency audit findings and public authentication hardening are documented. This is a private development preview.
+- Not performed: incident ingestion, background workers, model investigations, provider connections, patch execution, or GitHub writes.

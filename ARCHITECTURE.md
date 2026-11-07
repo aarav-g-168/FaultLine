@@ -1,6 +1,6 @@
 # Faultline architecture
 
-Status: proposed; implementation starts after foundation review.
+Status: M1 foundation implemented. Identity, project authorization, migrations, generated API types, and the mobile shell are present. Ingestion, workers, AI, provider integrations, and execution sections below describe planned later milestones.
 
 ## Shape and repository layout
 

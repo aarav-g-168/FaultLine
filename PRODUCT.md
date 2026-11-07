@@ -1,6 +1,6 @@
 # Faultline
 
-Status: proposed product baseline; awaiting review before implementation.
+Status: product baseline accepted for M1. Foundation implementation is ready for milestone review; later milestones remain planned.
 
 Faultline takes developers from a production failure to an evidence-backed diagnosis, a tested patch, and a human-approved draft pull request.
 
