@@ -1,0 +1,49 @@
+name: faultline
+services:
+  postgres:
+    image: postgres:17.6
+    environment:
+      POSTGRES_USER: faultline
+      POSTGRES_DB: faultline
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the root .env}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U faultline -d faultline"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    image: redis:7.4.5-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["127.0.0.1:6379:6379"]
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  migrate:
+    build:
+      context: ..
+      dockerfile: services/api/Dockerfile
+    environment: &api-env
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://faultline:${POSTGRES_PASSWORD}@postgres:5432/faultline
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in the root .env}
+      REDIS_URL: redis://redis:6379/0
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      postgres: {condition: service_healthy}
+  api:
+    build:
+      context: ..
+      dockerfile: services/api/Dockerfile
+    environment: *api-env
+    ports: ["8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+volumes:
+  postgres-data:
+  redis-data:
