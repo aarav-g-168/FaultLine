@@ -1,0 +1,15 @@
+[tool.pytest.ini_options]
+testpaths = ["services/api/tests"]
+pythonpath = ["services/api"]
+filterwarnings = ["error"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+exclude = [".venv", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "single"
