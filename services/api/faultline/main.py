@@ -194,7 +194,9 @@ def create_app(settings: Settings | None = None):
         limit(request, db, 'logout')
         token = db.get(RefreshToken, digest(body.refresh_token))
         if token:
-            family = db.get(SessionFamily, token.family_id)
+            family = db.scalar(
+                select(SessionFamily).where(SessionFamily.id == token.family_id).with_for_update()
+            )
             family.revoked = True
             audit(db, family.user_id, 'identity.logout', family.id)
             commit(db)
